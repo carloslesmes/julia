@@ -7,7 +7,7 @@ import Base: *, +, -, /, <, <<, >>, >>>, <=, ==, >, >=, ^, (~), (&), (|), ($),
              ndigits, promote_rule, rem, show, isqrt, string, isprime, powermod,
              widemul, sum, trailing_zeros, trailing_ones, count_ones, base, parseint,
              serialize, deserialize, bin, oct, dec, hex, isequal, invmod,
-             prevpow2, nextpow2, ndigits0z, widen
+             prevpow2, nextpow2, ndigits0z, widen, zero, one
 
 type BigInt <: Integer
     alloc::Cint
@@ -148,6 +148,11 @@ end
 convert(::Type{Int128}, x::BigInt) = copysign(int128(uint128(abs(x))),x)
 
 promote_rule{T<:Integer}(::Type{BigInt}, ::Type{T}) = BigInt
+
+zero(::Type{BigInt}) = BigInt(0)
+zero(x::BigInt) = BigInt(0)
+one(::Type{BigInt}) = BigInt(1)
+one(x::BigInt) = BigInt(1)
 
 # serialization
 
